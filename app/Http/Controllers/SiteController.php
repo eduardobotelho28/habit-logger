@@ -10,9 +10,7 @@ class SiteController extends Controller
     
     public function index()
     {
-        return view('home', [
-            'name' => 'Dudu',
-        ]);
+        return view('home');
     }
 
 }
