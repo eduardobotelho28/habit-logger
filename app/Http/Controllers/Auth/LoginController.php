@@ -24,13 +24,24 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended(route('home'));
+            return redirect()->intended(route('dashboard'));
         }
 
         return back()->withErrors([
             'email' => 'As credenciais fornecidas estão incorretas.',
         ]);
 
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect(route('home'));
     }
 
 }

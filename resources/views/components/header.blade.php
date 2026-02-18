@@ -13,10 +13,26 @@
 
         {{-- Ações --}}
         <div class="flex items-center gap-4">
-            <a href="#"
-               class="px-5 py-2 rounded-lg bg-[#8c2f39] hover:brightness-110 transition font-medium">
-                Criar Conta
-            </a>
+
+            @guest
+                <a href="#"
+                class="px-5 py-2 rounded-lg bg-[#8c2f39] hover:brightness-110 transition font-medium">
+                    Criar Conta
+                </a>
+
+                <a href="{{ route('login') }}" class="px-5 py-2 rounded-lg bg-[#8c2f39] hover:brightness-110 transition font-medium">
+                    Entrar
+                </a>
+            @endguest
+
+            @auth
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="px-5 py-2 rounded-lg bg-[#8c2f39] hover:brightness-110 transition font-medium">
+                        Sair
+                    </button>
+                </form>
+            @endauth 
 
             <a href="https://github.com/"
                target="_blank"
