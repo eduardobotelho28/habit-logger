@@ -1,7 +1,15 @@
 <x-layout title="Loggher">
 
+    @if(auth()->check())
+        <div class="max-w-4xl mx-auto px-6 pt-6 text-center">
+            <p class="text-lg text-[#071013]/70">
+                Bem-vindo, <span class="font-semibold">{{ auth()->user()->name }}</span>!
+            </p>
+        </div>
+    @endif
+
     {{-- HERO --}}
-    <section class="max-w-4xl mx-auto px-6 pt-24 text-center">
+    <section class="max-w-4xl mx-auto px-6 pt-14 text-center">
 
         <h2 class="text-5xl font-bold tracking-tight">
             Loggher

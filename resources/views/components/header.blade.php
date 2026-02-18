@@ -3,7 +3,9 @@
 
         {{-- Branding --}}
         <div>
-            <h1 class="text-2xl font-bold tracking-tight">Loggher</h1>
+            <a href=" {{ route('home') }} " class="flex flex-col">
+                <h1 class="text-2xl font-bold tracking-tight">Loggher</h1>
+            </a>
             <p class="text-sm text-[#fde8e9]/60">
                 Construa consistência. Um dia de cada vez.
             </p>
