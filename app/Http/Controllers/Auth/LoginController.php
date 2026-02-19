@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;    
 class LoginController extends Controller
@@ -13,13 +14,15 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function authenticate(Request $request)
+    public function authenticate(LoginRequest $request)
     {
+
+        $credentials = $request->only('email', 'password');
  
-        $credentials = $request->validate([
-            'email'    => ['required', 'email']     ,
-            'password' => ['required', 'min:6']     ,
-        ]); 
+        // $credentials = $request->validate([
+        //     'email'    => ['required', 'email']     ,
+        //     'password' => ['required', 'min:6']     ,
+        // ]); 
         
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -28,7 +31,7 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'As credenciais fornecidas estão incorretas.',
+            'credentialsError' => 'As credenciais fornecidas estão incorretas.',
         ]);
 
     }

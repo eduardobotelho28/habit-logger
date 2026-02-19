@@ -1,5 +1,11 @@
 <x-layout title="Loggher">
 
-   <h1>dashboard</h1>
+   @if(auth()->check())
+        <div class="max-w-4xl mx-auto px-6 pt-6 text-center">
+            <p class="text-lg text-[#071013]/70">
+                Bem-vindo(a) a sua dashboard, <span class="font-semibold">{{ auth()->user()->name }}</span>!
+            </p>
+        </div>
+    @endif
 
 </x-layout>

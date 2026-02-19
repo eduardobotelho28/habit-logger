@@ -1,6 +1,6 @@
 <x-layout title="Entrar • Loggher">
 
-    <section class="min-h-[70vh] flex items-center justify-center px-6">
+    <section class="min-h-[70vh] flex items-center justify-center px-6 m-6">
 
         <div class="w-full max-w-md">
 
@@ -9,15 +9,37 @@
 
                 {{-- Title --}}
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold text-[#071013]">Entrar</h2>
+                    <h2 class="text-3xl font-bold text-[#071013]">Registre-se</h2>
                     <p class="text-[#071013]/60 mt-2 text-sm">
-                        Continue registrando sua consistência.
+                        Começe agora.
                     </p>
                 </div>
 
                 {{-- Form --}}
-                <form method="POST" action="{{ route('login.submit') }}" class="space-y-6">
+                <form method="POST" action="{{ route('cadastro.submit') }}" class="space-y-6">
                     @csrf
+
+                    {{-- Nome --}}
+                    <div>
+                        <label class="block text-sm font-medium text-[#071013] mb-1">
+                            Nome
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            class="w-full px-4 py-2 rounded-lg border border-[#071013]/20
+                                   focus:outline-none focus:ring-2 focus:ring-[#8c2f39]
+                                   focus:border-[#8c2f39] bg-white"
+                            placeholder="Seu nome"
+                        >
+                        @error('name')
+                            <p class="text-red-500 text-sm">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                       
+                    </div>
 
                     {{-- Email --}}
                     <div>
@@ -62,11 +84,32 @@
                         @enderror
                     </div>
 
+                    {{-- Password Confirmation --}}
+                    <div>
+                        <label class="block text-sm font-medium text-[#071013] mb-1">
+                            Repetir Senha
+                        </label>
+
+                        <input
+                            type="password"
+                            name="password_confirmation"
+                            class="w-full px-4 py-2 rounded-lg border border-[#071013]/20
+                                   focus:outline-none focus:ring-2 focus:ring-[#8c2f39]
+                                   focus:border-[#8c2f39] bg-white"
+                            placeholder="••••••••"
+                        >
+                        @error('password')
+                            <p class="text-red-500 text-sm">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
                     <p class="text-center text-sm text-[#071013]/60 mt-6">
-                        Ainda não possui conta?
-                        <a href="{{ route('cadastro') }}"
+                       Já possui cadastro?
+                        <a href="{{ route('login') }}"
                         class="font-medium text-[#8c2f39] hover:underline hover:brightness-110 transition">
-                            Registre-se
+                            Entrar
                         </a>
                     </p>
 
@@ -75,7 +118,7 @@
                         type="submit"
                         class="w-full py-3 rounded-lg bg-[#8c2f39] text-[#fde8e9]
                                font-semibold hover:brightness-110 transition cursor-pointer">
-                        Entrar
+                        Criar Conta
                     </button>
 
                     <div>

@@ -1,5 +1,5 @@
 <header class="bg-[#071013] text-[#fde8e9] border-b border-[#8c2f39]">
-    <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
 
         {{-- Branding --}}
         <div>
