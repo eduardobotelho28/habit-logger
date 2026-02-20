@@ -23,6 +23,8 @@ return new class extends Migration
                   ->cascadeOnDelete();
             $table->date('completed_at');
             $table->timestamps();
+
+            $table->unique(['habit_id', 'completed_at']);
         });
     }
 
