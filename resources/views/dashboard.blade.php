@@ -10,6 +10,8 @@
 
     <div>
 
+        <a href="{{ route('habit.create') }}">Crie um novo hábito.</a>
+
         <h2>
             Listagem dos Hábitos
         </h2>
@@ -22,14 +24,29 @@
                     </p>
 
                     <p>[ {{ $item->habitLogs->count() }} ]</p>
+
+                    <form action="{{ route('habit.destroy', $item) }}" method="post">
+
+                        @csrf
+                        @method('DELETE')
+
+                        <button>Apagar</button>
+
+                    </form>
+
+                   
+
                 </li>
             @empty
                 <p>Sem hábitos cadastrados ainda.</p>
                 <a href="{{ route('home') }}">Cadastrar novo hábito</a>
             @endforelse
         </ul>
-
         
     </div>
+
+    @session('success')
+        <p>{{ session('success') }}</p>
+    @endsession
 
 </x-layout>
