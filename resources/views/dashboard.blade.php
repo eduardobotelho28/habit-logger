@@ -34,6 +34,9 @@
 
                     </form>
 
+
+                    <a href="{{ route('habit.edit', $item) }}">Editar hábito</a>
+
                    
 
                 </li>
