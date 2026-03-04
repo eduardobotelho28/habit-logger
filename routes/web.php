@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     //edit habit submit
     Route::put('/dashboard/habits/update/{habit}', [HabitController::class, 'update'])->name('habit.update');
 
-
+    Route::get('/dashboard/habits/settings', [HabitController::class, 'settings'])->name('habit.settings');
 
 });
 

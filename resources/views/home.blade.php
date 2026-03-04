@@ -25,7 +25,7 @@
         </p>
 
         <div class="mt-10">
-            <a href="#"
+            <a href="{{ route('cadastro') }}"
                class="px-8 py-4 text-lg rounded-xl bg-[#8c2f39] text-[#fde8e9] hover:brightness-110 transition font-semibold">
                 Quero começar agora!
             </a>

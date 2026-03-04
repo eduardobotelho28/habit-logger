@@ -15,7 +15,7 @@
         <div class="flex items-center gap-4">
 
             @guest
-                <a href="#"
+                <a href="{{ route('cadastro') }}"
                 class="px-5 py-2 rounded-lg bg-[#8c2f39] hover:brightness-110 transition font-medium">
                     Criar Conta
                 </a>
