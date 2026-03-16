@@ -23,6 +23,15 @@
             </p>
         </div>
 
+        {{-- Feedback de sucesso --}}
+        @if(session('success'))
+            <div class="mb-10 p-4 rounded-lg bg-[#8c2f39]/10 border border-[#8c2f39]/30">
+                <p class="text-sm text-[#071013]">
+                    {{ session('success') }}
+                </p>
+            </div>
+        @endif
+
         {{-- Listagem --}}
         <ul class="space-y-6">
 
@@ -43,18 +52,34 @@
                             </p>
                         </div>
 
+                        @php
+                         
+                            $wasCompletedToday = $item->habitLogs
+                                ->where('user_id', auth()->id())
+                                ->where('completed_at', \Carbon\Carbon::today()->toDateString())
+                                ->isNotEmpty() ;
+                         
+                        @endphp
+
                         {{-- Checkbox (sem lógica por enquanto) --}}
-                        <div>
+                        <form
+                        method="POST"
+                        action="{{route('habit.toggle', $item->id)}}"
+                        id="form-{{$item->id}}"
+                        >
+
+                            @csrf
                             <input
+                                onchange="document.getElementById('form-{{$item->id}}').submit()"
                                 type="checkbox"
-                                disabled
-                                class="w-5 h-5 rounded border-[#071013]/30
-                                       text-[#8c2f39] focus:ring-[#8c2f39]">
-                        </div>
+                                {{ $wasCompletedToday ? "checked" : " " }}
+                                class="w-5 h-5 accent-[#8C2F39]">
+                            
+                        </form>
 
                     </div>
 
-                </li>
+                </li> 
 
             @empty
 
@@ -69,15 +94,6 @@
             @endforelse
 
         </ul>
-
-        {{-- Feedback de sucesso --}}
-        @if(session('success'))
-            <div class="mt-10 p-4 rounded-lg bg-[#8c2f39]/10 border border-[#8c2f39]/30">
-                <p class="text-sm text-[#071013]">
-                    {{ session('success') }}
-                </p>
-            </div>
-        @endif
 
     </section>
 

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Habit;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HabitRequest;
+use App\Models\HabitLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
@@ -35,7 +37,7 @@ class HabitController extends Controller
     {
         $validated = $request->validated();
 
-        auth()->user()->habits()->create($validated);
+        Auth::user()->habits()->create($validated);
 
         return redirect(route('dashboard'))->with('success', 'Hábito criado com sucesso');
     }
@@ -61,7 +63,7 @@ class HabitController extends Controller
      */
     public function update(HabitRequest $request, Habit $habit)
     {
-        if($habit->user_id != auth()->user()->id) {
+        if($habit->user_id != Auth::user()->id) {
             abort(403);
         }
 
@@ -77,7 +79,7 @@ class HabitController extends Controller
      */
     public function destroy(Habit $habit)
     {
-        if($habit->user_id != auth()->user()->id) {
+        if($habit->user_id != Auth::user()->id) {
             abort(403);
         }
 
@@ -95,4 +97,38 @@ class HabitController extends Controller
 
         return view('habits.settings', compact('habits'));
     }
+
+    public function toggle (Habit $habit)
+    {
+
+        if($habit->user_id != Auth::user()->id) {
+            abort(403);
+        }
+
+        $today = Carbon::today()->toDateString();
+
+        $log = HabitLog::query()
+            ->where('habit_id', $habit->id)
+            ->where('completed_at', $today)
+            ->first();
+
+        if($log) {
+            $log->delete();
+            $message = 'Hábito Desmarcado.';
+        }
+        else {
+            HabitLog::create([
+                'user_id'  => Auth::user()->id,
+                'habit_id' => $habit->id,
+                'completed_at' => $today
+            ]);
+            $message = 'Hábito Concluído com sucesso!';
+        }
+
+        return redirect()
+            ->route('dashboard')
+            ->with('success', $message);
+
+    }
+
 }
