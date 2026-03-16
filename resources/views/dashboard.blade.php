@@ -52,15 +52,6 @@
                             </p>
                         </div>
 
-                        @php
-                         
-                            $wasCompletedToday = $item->habitLogs
-                                ->where('user_id', auth()->id())
-                                ->where('completed_at', \Carbon\Carbon::today()->toDateString())
-                                ->isNotEmpty() ;
-                         
-                        @endphp
-
                         {{-- Checkbox (sem lógica por enquanto) --}}
                         <form
                         method="POST"
@@ -72,7 +63,7 @@
                             <input
                                 onchange="document.getElementById('form-{{$item->id}}').submit()"
                                 type="checkbox"
-                                {{ $wasCompletedToday ? "checked" : " " }}
+                                {{ $item->wasCompletedToday() ? "checked" : " " }}
                                 class="w-5 h-5 accent-[#8C2F39]">
                             
                         </form>
