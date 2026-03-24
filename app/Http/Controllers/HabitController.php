@@ -6,14 +6,18 @@ use App\Models\Habit;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HabitRequest;
 use App\Models\HabitLog;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+
 class HabitController extends Controller
 {
+
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -55,6 +59,7 @@ class HabitController extends Controller
      */
     public function edit(Habit $habit)
     {
+        $this->authorize('update', $habit);
         return view ('habits/edit', compact('habit'));
     }
 
@@ -63,6 +68,9 @@ class HabitController extends Controller
      */
     public function update(HabitRequest $request, Habit $habit)
     {
+
+        $this->authorize('update', $habit);
+
         if($habit->user_id != Auth::user()->id) {
             abort(403);
         }
@@ -71,7 +79,7 @@ class HabitController extends Controller
 
         return redirect()  
               ->route('dashboard')
-              ->with('success', 'Hábito editado com sucesso');
+              ->with('success', 'Hábito Editado com Sucesso.');
     }
 
     /**
@@ -79,15 +87,13 @@ class HabitController extends Controller
      */
     public function destroy(Habit $habit)
     {
-        if($habit->user_id != Auth::user()->id) {
-            abort(403);
-        }
+        $this->authorize('delete', $habit);
 
         $habit->delete();
 
         return redirect()
             ->route('dashboard')
-            ->with('success', 'Hábito deletado com sucesso');
+            ->with('success', 'Hábito Deletado com Sucesso');
     }
 
     public function settings ()
@@ -101,9 +107,7 @@ class HabitController extends Controller
     public function toggle (Habit $habit)
     {
 
-        if($habit->user_id != Auth::user()->id) {
-            abort(403);
-        }
+        $this->authorize('toggle', $habit);
 
         $today = Carbon::today()->toDateString();
 
@@ -122,7 +126,7 @@ class HabitController extends Controller
                 'habit_id' => $habit->id,
                 'completed_at' => $today
             ]);
-            $message = 'Hábito Concluído com sucesso!';
+            $message = 'Hábito Concluído com Sucesso!';
         }
 
         return redirect()
