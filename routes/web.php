@@ -37,9 +37,14 @@ Route::middleware('auth')->group(function () {
     //edit habit submit
     Route::put('/dashboard/habits/update/{habit}', [HabitController::class, 'update'])->name('habit.update');
 
+    //settings view
     Route::get('/dashboard/habits/settings', [HabitController::class, 'settings'])->name('habit.settings');
 
+    //toggle habit as marked
     Route::post('/dashboard/habits/{habit}/toggle', [HabitController::class, 'toggle'])->name('habit.toggle');
+
+    //history view
+    Route::get('/dashboard/habits/history', [HabitController::class, 'history'])->name('habit.history');
 
 });
 

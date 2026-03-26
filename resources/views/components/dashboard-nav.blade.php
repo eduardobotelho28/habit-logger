@@ -18,9 +18,12 @@
 
             {{-- Histórico --}}
             <li>
-                <a href="#"
+                <a href="{{ route('habit.history') }}"
                    class="px-4 py-2 rounded-lg text-sm font-medium transition
-                          text-[#071013]/70 hover:bg-[#071013]/5">
+                          {{ Route::is('habit.history')
+                            ? 'bg-[#8c2f39] text-[#fde8e9]'
+                            : 'text-[#071013]/70 hover:bg-[#071013]/5'
+                        }}">
                     Histórico
                 </a>
             </li>

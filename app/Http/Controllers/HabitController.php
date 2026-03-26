@@ -6,6 +6,7 @@ use App\Models\Habit;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HabitRequest;
 use App\Models\HabitLog;
+use Carbon\Carbon as CarbonAlias;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -133,6 +134,23 @@ class HabitController extends Controller
             ->route('dashboard')
             ->with('success', $message);
 
+    }
+
+    public function history () {
+
+        $selectedYear = Carbon::now()->year;
+
+        $startDate = Carbon::create($selectedYear, 1, 1);
+        $endDate   = Carbon::create($selectedYear, 12, 31, 23, 59, 59);
+
+        $habits = Auth::user()
+                        ->habits()
+                        ->with(['habitLogs' => function ($query) use ($startDate, $endDate) {
+                            $query->whereBetween('completed_at', [$startDate, $endDate]);
+                        }])
+                        ->get();
+
+        return view ('habits.history', compact('habits', 'selectedYear'));
     }
 
 }
