@@ -3,6 +3,15 @@
     <x-dashboard-nav />
 
     <div class="max-w-7xl mx-auto mt-10">
+        @foreach ($availableYears as $year)
+            <a href="{{ route('habit.history', ['year' => $year]) }}"
+            class="px-4 py-2 rounded-lg border-2 border-black {{ $year === $selectedYear ? 'bg-[#8c2f39] text-white' : 'bg-[#fde8e9]/30 text-[#071013]' }} hover:bg-[#fde8e9]/10 transition m-2">
+                {{ $year }}
+            </a>
+        @endforeach
+    </div>
+
+    <div class="max-w-7xl mx-auto mt-10">
         @forelse ($habits as $habit)
             <x-contribution :$habit :year="$selectedYear"/>
         @empty

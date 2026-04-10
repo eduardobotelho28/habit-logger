@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/habits/{habit}/toggle', [HabitController::class, 'toggle'])->name('habit.toggle');
 
     //history view
-    Route::get('/dashboard/habits/history', [HabitController::class, 'history'])->name('habit.history');
+    Route::get('/dashboard/habits/history/{year?}', [HabitController::class, 'history'])->name('habit.history');
 
 });
 

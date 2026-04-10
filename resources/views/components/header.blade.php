@@ -28,10 +28,13 @@
             @auth
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="px-5 py-2 rounded-lg bg-[#8c2f39] hover:brightness-110 transition font-medium">
+                    <button type="submit" class="px-5 py-2 rounded-lg bg-[#8c2f39] hover:brightness-110 transition font-medium cursor-pointer">
                         Sair
                     </button>
                 </form>
+                <a href="{{ route('dashboard') }}" class="px-5 py-2 rounded-lg bg-[#8c2f39] hover:brightness-110 transition font-medium cursor-pointer">
+                    Dashboard
+                </a>
             @endauth 
 
             <a href="https://github.com/"
