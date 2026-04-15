@@ -1,4 +1,4 @@
-<x-layout title="Dashboard • Loggher">
+<x-layout title="Gerenciar • Loggher">
 
     @if(auth()->check())
         <div class="max-w-5xl mx-auto px-6 pt-10 text-center">

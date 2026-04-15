@@ -28,15 +28,6 @@
                 </a>
             </li>
 
-            {{-- Calendário --}}
-            <li>
-                <a href="#"
-                   class="px-4 py-2 rounded-lg text-sm font-medium transition
-                          text-[#071013]/70 hover:bg-[#071013]/5">
-                    Calendário
-                </a>
-            </li>
-
             {{-- Gerenciar hábitos --}}
             <li>
                 <a href="{{ route('habit.settings') }}"

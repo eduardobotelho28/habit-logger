@@ -37,7 +37,7 @@
                 </a>
             @endauth 
 
-            <a href="https://github.com/"
+            <a href="https://github.com/eduardobotelho28/habit-logger"
                target="_blank"
                class="px-5 py-2 rounded-lg border border-[#fde8e9]/30 hover:bg-[#fde8e9]/10 transition">
                 GitHub

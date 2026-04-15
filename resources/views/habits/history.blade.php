@@ -1,4 +1,13 @@
-<x-layout title="Hoje • Loggher">
+<x-layout title="Histórico • Loggher">
+
+    @if(auth()->check())
+        <div class="max-w-5xl mx-auto px-6 pt-10 text-center">
+            <p class="text-lg text-[#071013]/70">
+                Bem-vindo(a) à sua dashboard,
+                <span class="font-semibold">{{ auth()->user()->name }}</span>!
+            </p>
+        </div>
+    @endif
 
     <x-dashboard-nav />
 

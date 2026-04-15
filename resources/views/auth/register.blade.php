@@ -1,4 +1,4 @@
-<x-layout title="Entrar • Loggher">
+<x-layout title="Registrar • Loggher">
 
     <section class="min-h-[70vh] flex items-center justify-center px-6 m-6">
 
